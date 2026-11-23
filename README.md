@@ -16,6 +16,8 @@ scAMUSE performs:
 6. K-means clustering at known K on test embeddings and evaluation with ARI, NMI, AMI, and ACC.
 
 ## Project structure
+
+```
 scAMUSE/
 ├── run_configs/               # launcher scripts for every experiment in the paper
 ├── analysis/                  # ablation runners, K-sensitivity, result collectors
@@ -23,7 +25,7 @@ scAMUSE/
 ├── results/                   # master result tables (CSV) for all experiments
 ├── benchmark_toolkit/         # baseline runners/patches (11 baseline methods)
 ├── scgpt/                     # scGPT source code (included)
-├── scGPT_pretrained/          # scGPT whole-human checkpoint (included)
+├── scGPT_pretrained/          # scGPT checkpoint files (best_model.pt: see download note below)
 ├── data/                      # input .h5ad files (links below; not included)
 ├── run_scAMUSE.py             # main pipeline script
 ├── model.py                   # refinement head, semi-supervised losses, trainer
@@ -34,13 +36,25 @@ scAMUSE/
 ├── requirements.txt
 ├── requirements_full.txt
 └── README.md
-
+```
 
 ## Installation
 
+```
+pip install -r requirements.txt
+```
+
 (`requirements_full.txt` pins the exact package versions used in our experiments.)
 
-The scGPT source code (`scgpt/`, from https://github.com/bowanglab/scGPT) and the pretrained whole-human checkpoint (`scGPT_pretrained/`: `best_model.pt`, `vocab.json`, `args.json`) are already included in this repository — no separate download is needed.
+The scGPT source code (`scgpt/`, from https://github.com/bowanglab/scGPT) is already included in this repository.
+
+## scGPT checkpoint
+
+The scGPT whole-human checkpoint file `best_model.pt` is too large for GitHub and is therefore **not included**. Download it from:
+
+https://huggingface.co/MohamedMabrouk/scGPT/commit/72555feb2fdff37022f9ffddb23fa09f3b7067c3
+
+and place it in the `scGPT_pretrained/` folder (which already contains `args.json` and `vocab.json`).
 
 ## Input data
 
@@ -58,15 +72,18 @@ Place the `.h5ad` files in the `data/` folder. The AnnData object must contain a
 | Innate lymphocytes | https://cellxgene.cziscience.com/e/4057e00c-0678-454a-90e4-b341a162d007.cxg/ |
 
 ## Usage (main 5%-label setting)
-python3 run_scAMUSE.py 
---data data/Brain.h5ad 
---output-dir result/Brain_s42 
---labeled-ratio 0.05 --seed 42 --epochs 100 
---memory-temperature 0.1 --memory-update-strength 0.5 
---w-dcam 0.1 --w-dcam-attraction 1.0 --w-dcam-diversity 0.5 
---w-dcam-util 0.1 --w-dcam-energy 0.05 --w-dcam-entropy 0.2 
---warmup-epochs 50 --ramp-epochs 30 
---lr 1e-3 --weight-decay 1e-5 --patience 10
+
+```
+python3 run_scAMUSE.py \
+  --data data/Brain.h5ad \
+  --output-dir result/Brain_s42 \
+  --labeled-ratio 0.05 --seed 42 --epochs 100 \
+  --memory-temperature 0.1 --memory-update-strength 0.5 \
+  --w-dcam 0.1 --w-dcam-attraction 1.0 --w-dcam-diversity 0.5 \
+  --w-dcam-util 0.1 --w-dcam-energy 0.05 --w-dcam-entropy 0.2 \
+  --warmup-epochs 50 --ramp-epochs 30 \
+  --lr 1e-3 --weight-decay 1e-5 --patience 10
+```
 
 ## Key arguments
 
