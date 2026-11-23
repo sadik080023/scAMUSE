@@ -1,0 +1,42 @@
+{
+  "Brain": {
+    "n_cells": 5944,
+    "n_classes": 22,
+    "label_column": "cell_type"
+  },
+  "Fat": {
+    "n_cells": 13318,
+    "n_classes": 34,
+    "label_column": "cell_type"
+  },
+  "Retina": {
+    "n_cells": 26381,
+    "n_classes": 71,
+    "label_column": "celltype"
+  },
+  "Breast_carcinoma": {
+    "n_cells": 10689,
+    "n_classes": 19,
+    "label_column": "cell_type"
+  },
+  "Quadriceps_tendon": {
+    "n_cells": 12808,
+    "n_classes": 22,
+    "label_column": "cell_type"
+  },
+  "Cortex": {
+    "n_cells": 22360,
+    "n_classes": 11,
+    "label_column": "cell_type"
+  },
+  "Mucosal_Atlas": {
+    "n_cells": 86725,
+    "n_classes": 22,
+    "label_column": "cell_type"
+  },
+  "Innate_lymphocytes": {
+    "n_cells": 64793,
+    "n_classes": 9,
+    "label_column": "cell_type"
+  }
+}
